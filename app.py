@@ -4,6 +4,8 @@ from keras.preprocessing.text import Tokenizer
 from keras.models import load_model 
 import streamlit as st
 import pickle
+import tensorflow as tf
+
 
 
 model = load_model("model.pkl") 
