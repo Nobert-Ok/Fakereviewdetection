@@ -1,16 +1,7 @@
-import flask
-import pandas as pd
-import pandas as pd
-import numpy as np
-import numpy as np
-import codecs
-import pickle
-import pandas as pd
 import re
 from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
 from keras.models import load_model 
-from flask import Flask, request, render_template
 import streamlit as st
 import pickle
 
@@ -57,7 +48,7 @@ def get_predictions(text):
     
 #     return email_type
 
-st.title("Email/SMS Spam Classifier")
+st.title("Fake/Real Review Classifier")
 
 input_sms = st.text_area("Enter the message")
 
