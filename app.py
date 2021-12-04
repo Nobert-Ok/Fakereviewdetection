@@ -16,7 +16,7 @@ tokenizer = pickle.load(open('tokenizer.pickle','rb'))
 
 label2int = {'0': 0, '1': 1}
 int2label = {0: '0', 1: '1'}
-SEQUENCE_LENGTH = 100 
+SEQUENCE_LENGTH = 334
 
 def preprocess_text(sen):
     sentence = remove_tags(sen)
