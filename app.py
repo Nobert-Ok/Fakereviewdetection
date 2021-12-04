@@ -7,7 +7,6 @@ import pickle
 import tensorflow as tf
 
 
-
 model = load_model("model.pkl") 
 # loading
 with open('tokenizer.pickle', 'rb') as handle:
