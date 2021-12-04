@@ -4,7 +4,7 @@ from keras.preprocessing.text import Tokenizer
 from keras.models import load_model 
 import streamlit as st
 import pickle
-import tensorflow as tf
+import numpy as np
 
 
 # model = load_model("model.pkl") 
