@@ -1,3 +1,2 @@
 streamlit~=0.79.0
 keras
-tensorflow
