@@ -11,12 +11,13 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.preprocessing.text import Tokenizer
 from keras.models import load_model 
 from flask import Flask, request, render_template
+import streamlit as st
+import pickle
 
 
-
-model = load_model("model/network.h5") 
+model = load_model("model.pkl") 
 # loading
-with open('model/tokenizer.pickle', 'rb') as handle:
+with open('tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
 label2int = {'0': 0, '1': 1}
@@ -46,45 +47,26 @@ def get_predictions(text):
     return int2label[np.argmax(prediction)]
 
 
-def show_predict(email_text):
-    prediction = get_predictions(email_text)
-    email_type = ""
-    if(prediction == '1'):
-        email_type = "The prediction is "+str(prediction)+" It is a Spam"
-    else:
-        email_type = "The prediction is "+str(prediction)+" It is not a Spam"
+# def show_predict(email_text):
+#     prediction = get_predictions(email_text)
+#     email_type = ""
+#     if(prediction == '1'):
+#         email_type = "The prediction is "+str(prediction)+" It is a Spam"
+#     else:
+#         email_type = "The prediction is "+str(prediction)+" It is not a Spam"
     
-    return email_type
+#     return email_type
 
+st.title("Email/SMS Spam Classifier")
 
+input_sms = st.text_area("Enter the message")
 
-
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return render_template('main.html')
-
-
-@app.route('/predict', methods=['GET', 'POST'])
-def predict():
-  
-
-    data = request.form.get('email_text')
-    prediction = ""
-    if data == None:
-        prediction = 'Got None'
+if st.button('Predict'):
+    # 1. predict
+    result = get_predictions(input_sms)
+    # 2. Display
+    if result == 1:
+        st.header("Fake Review")
     else:
-        # model.predict.predict returns a dictionarys
-        prediction = show_predict(data)
-    # return json.dumps(str(prediction))
+        st.header("Genuine Review")
 
-    return render_template('main.html',  original_input={
-            "email_text":data,}, 
-        
-        prediction=prediction)
-
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
