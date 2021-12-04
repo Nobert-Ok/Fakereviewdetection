@@ -11,8 +11,8 @@ import tensorflow as tf
 model = pickle.load(open('model.pkl','rb'))
 
 # loading
-with open('tokenizer.pickle', 'rb') as handle:
-    tokenizer = pickle.load(handle)
+# with open('tokenizer.pickle', 'rb') as handle:
+tokenizer = pickle.load(open('tokenizer.pickle','rb'))
 
 label2int = {'0': 0, '1': 1}
 int2label = {0: '0', 1: '1'}
